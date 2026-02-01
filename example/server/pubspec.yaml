@@ -1,0 +1,15 @@
+name: server
+description: A simple HTTPS server to check whether a specific SSL certificate is trusted.
+publish_to: none
+version: 1.0.0
+
+environment:
+  sdk: ^3.10.7
+
+dependencies:
+  shelf: ^1.4.2
+  shelf_router: ^1.1.4
+
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.25.6

@@ -1,0 +1,12 @@
+# Code Spell Check
+cspell.config.yaml
+
+# Build
+.dart_tool/
+.idea/
+build/
+
+# Scripts and Tooling
+example/generate_certificates.sh
+example/root-certificate.cnf
+example/server-certificate.cnf

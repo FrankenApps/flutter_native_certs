@@ -1,0 +1,26 @@
+[ req ]
+default_bits       = 2048
+default_md         = sha256
+prompt             = no
+distinguished_name = dn
+req_extensions     = v3_server
+
+[ dn ]
+C  = DE
+ST = BY
+O  = Flutter Dev
+CN = localhost
+
+[ v3_server ]
+basicConstraints = critical, CA:FALSE
+keyUsage = critical, digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth
+subjectKeyIdentifier = hash
+
+subjectAltName = @san
+
+[ san ]
+DNS.1 = localhost
+IP.1  = 127.0.0.1
+IP.2  = 10.0.2.2
+IP.3  = 0.0.0.0
