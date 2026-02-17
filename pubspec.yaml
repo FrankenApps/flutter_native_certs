@@ -1,15 +1,24 @@
 name: flutter_native_certs
-description: "A Flutter plugin to use the certificates from the native certificate store on every platform."
+description: 'A Flutter plugin to use the certificates from the native certificate store on every platform.'
+documentation: https://pub.dev/documentation/flutter_native_certs
 homepage: https://github.com/FrankenApps/flutter_native_certs
 issue_tracker: https://github.com/FrankenApps/flutter_native_certs/issues
 repository: https://github.com/FrankenApps/flutter_native_certs
-version: 1.0.0
+version: 1.0.1
 
 topics:
  - network
  - ssl
  - http
  - certificates
+
+platforms:
+  android:
+  ios:
+  linux:
+  macos:
+  web:
+  windows:
 
 environment:
   sdk: ^3.10.7
@@ -31,8 +40,3 @@ flutter:
       android:
         package: de.frankenapps.flutter_native_certs
         pluginClass: FlutterNativeCertsPlugin
-        ios:
-        linux:
-        macos:
-        web:
-        windows:
