@@ -4,7 +4,7 @@ documentation: https://pub.dev/documentation/flutter_native_certs
 homepage: https://github.com/FrankenApps/flutter_native_certs
 issue_tracker: https://github.com/FrankenApps/flutter_native_certs/issues
 repository: https://github.com/FrankenApps/flutter_native_certs
-version: 1.0.1
+version: 1.0.2
 
 topics:
  - network

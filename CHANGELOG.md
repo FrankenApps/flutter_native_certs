@@ -1,3 +1,6 @@
+## 1.0.2
+* Migrate to built-in Kotlin on AGP 9+.
+
 ## 1.0.1
 * Explicitly support all platforms.
 
