@@ -1,3 +1,6 @@
+## Unreleased
+* Exclude expired user-installed certificates by default. Expired system certificates remain included.
+
 ## 1.0.2
 * Migrate to built-in Kotlin on AGP 9+.
 

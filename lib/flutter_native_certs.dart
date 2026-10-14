@@ -52,12 +52,16 @@ class FlutterNativeCerts {
   /// The following parameters are available:
   /// * `includeDefaultFlutterCertificates`: Whether to include the certificates
   /// bundled with the Flutter framework.
+  /// * `includeExpiredUserCertificates`: Whether to include expired
+  /// user-installed certificates. Expired system certificates are always
+  /// included.
   /// * `includeSystemCertificates`: Whether to include the native system
   /// certificates.
   /// * `includeUserCertificates`: Whether to include custom user installed
   /// certificates.
   Future<void> initialize({
     bool includeDefaultFlutterCertificates = false,
+    bool includeExpiredUserCertificates = false,
     bool includeSystemCertificates = true,
     bool includeUserCertificates = true,
   }) async {
@@ -75,6 +79,7 @@ class FlutterNativeCerts {
 
     final certificates = await FlutterNativeCertsPlatform.instance
         .getCertificates(
+          includeExpiredUserCertificates: includeExpiredUserCertificates,
           includeSystemCertificates: includeSystemCertificates,
           includeUserCertificates: includeUserCertificates,
         );
