@@ -14,11 +14,13 @@ class MethodChannelFlutterNativeCerts extends FlutterNativeCertsPlatform {
 
   @override
   Future<List<X509Certificate>> getCertificates({
+    bool includeExpiredUserCertificates = false,
     bool includeSystemCertificates = true,
     bool includeUserCertificates = true,
   }) async {
     final result = await methodChannel
         .invokeMethod<List<dynamic>>('getCertificates', <String, dynamic>{
+          'includeExpiredUserCertificates': includeExpiredUserCertificates,
           'includeSystemCertificates': includeSystemCertificates,
           'includeUserCertificates': includeUserCertificates,
         });

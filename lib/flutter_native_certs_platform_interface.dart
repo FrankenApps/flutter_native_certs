@@ -30,6 +30,7 @@ abstract class FlutterNativeCertsPlatform extends PlatformInterface {
   /// Loads all certificates from the native certificate store of the current
   /// platform.
   Future<List<X509Certificate>> getCertificates({
+    bool includeExpiredUserCertificates = false,
     bool includeSystemCertificates = true,
     bool includeUserCertificates = true,
   }) {

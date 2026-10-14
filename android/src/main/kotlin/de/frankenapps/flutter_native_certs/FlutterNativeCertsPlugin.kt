@@ -8,6 +8,7 @@ import io.flutter.plugin.common.MethodChannel.Result
 import java.security.KeyStore
 import java.security.MessageDigest
 import java.security.cert.X509Certificate
+import java.util.Date
 
 /**
  * The FlutterNativeCertsPlugin is used to load all certificates from Androids'
@@ -48,18 +49,27 @@ class FlutterNativeCertsPlugin : FlutterPlugin, MethodCallHandler {
      * @param result The result of the method call.
      */
     private fun getCertificates(call: MethodCall, result: Result) {
+        val includeExpiredUser =
+            call.argument<Boolean>("includeExpiredUserCertificates") ?: false
         val includeSystem = call.argument<Boolean>("includeSystemCertificates") ?: true
         val includeUser = call.argument<Boolean>("includeUserCertificates") ?: true
 
         val certificates: List<X509Certificate> = try {
             val keyStore = KeyStore.getInstance("AndroidCAStore")
             keyStore.load(null, null)
-            keyStore.aliases().toList().filter { alias ->
-                (includeUser && alias.startsWith("user")) ||
-                        (includeSystem && alias.startsWith("system"))
+            val aliases = keyStore.aliases().toList()
+            val systemCertificates = aliases.filter { alias ->
+                includeSystem && alias.startsWith("system")
             }.map { alias ->
                 keyStore.getCertificate(alias) as X509Certificate
             }
+            val userCertificates = aliases.filter { alias ->
+                includeUser && alias.startsWith("user")
+            }.map { alias ->
+                keyStore.getCertificate(alias) as X509Certificate
+            }
+
+            systemCertificates + filterExpiredCertificates(userCertificates, includeExpiredUser)
         } catch (e: Exception) {
             result.error(
                 "getCertificates",
@@ -81,4 +91,14 @@ class FlutterNativeCertsPlugin : FlutterPlugin, MethodCallHandler {
         }
         result.success(certificateList)
     }
+}
+
+internal fun filterExpiredCertificates(
+    certificates: List<X509Certificate>,
+    includeExpired: Boolean,
+    now: Date = Date()
+): List<X509Certificate> = if (includeExpired) {
+    certificates
+} else {
+    certificates.filter { !it.notAfter.before(now) }
 }

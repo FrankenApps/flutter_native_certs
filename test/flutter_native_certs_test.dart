@@ -13,6 +13,7 @@ class MockFlutterNativeCertsPlatform
     implements FlutterNativeCertsPlatform {
   @override
   Future<List<X509Certificate>> getCertificates({
+    bool includeExpiredUserCertificates = false,
     bool includeSystemCertificates = true,
     bool includeUserCertificates = true,
   }) => Future.value([
@@ -22,7 +23,7 @@ class MockFlutterNativeCertsPlatform
       subject: 'CN=Test Subject',
       issuer: 'CN=Test Issuer',
       startValidity: DateTime(2024, 1, 1),
-      endValidity: DateTime(2025, 1, 1),
+      endValidity: DateTime(2095, 1, 1),
     ),
   ]);
 }
